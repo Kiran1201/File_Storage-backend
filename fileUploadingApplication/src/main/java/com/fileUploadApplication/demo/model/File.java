@@ -1,19 +1,29 @@
 package com.fileUploadApplication.demo.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "files")
 public class File {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String name;
+
+    private String type;
+
+    @Lob
+    private byte[] data;
+
+    @ManyToOne // Assuming each file is associated with one RAC
+    @JoinColumn(name = "rac_id") // Foreign key column for RAC
+    private Rac rac;
+
+    @ManyToOne // Assuming each file is associated with one folder
+    @JoinColumn(name = "folder_id") // Foreign key column for Folder
+    private Folder folder;
 
     public Long getId() {
         return id;
@@ -47,10 +57,19 @@ public class File {
         this.data = data;
     }
 
-    private String name;
+    public Rac getRac() {
+        return rac;
+    }
 
-    private String type;
+    public void setRac(Rac rac) {
+        this.rac = rac;
+    }
 
-    @Lob
-    private byte[] data;
+    public Folder getFolder() {
+        return folder;
+    }
+
+    public void setFolder(Folder folder) {
+        this.folder = folder;
+    }
 }

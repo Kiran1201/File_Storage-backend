@@ -1,6 +1,8 @@
 package com.fileUploadApplication.demo.service;
 
 import com.fileUploadApplication.demo.model.File;
+import com.fileUploadApplication.demo.model.Folder;
+import com.fileUploadApplication.demo.model.Rac;
 import com.fileUploadApplication.demo.repository.FileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +17,13 @@ public class FileService {
     @Autowired
     private FileRepository fileRepository;
 
-
-    public File storeFile(String name, String type, byte[] data) throws IOException {
+    public File storeFile(String name, String type, byte[] data, Rac rac, Folder folder) throws IOException {
         File file = new File();
         file.setName(name);
         file.setType(type);
         file.setData(data);
+        file.setRac(rac);
+        file.setFolder(folder);
         return fileRepository.save(file);
     }
 
@@ -39,9 +42,7 @@ public class FileService {
     public void deleteFile(Long id) {
         fileRepository.deleteById(id);
     }
-
-
-
-
-
 }
+
+
+

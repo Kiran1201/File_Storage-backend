@@ -28,10 +28,8 @@ public class FolderService {
     }
 
     public Folder createFolder(String folderName, String racId) {
-        Rac rac = racRepository.findByRacId(racId);
-        if (rac == null) {
-            throw new RuntimeException("RAC not found with ID: " + racId);
-        }
+        Rac rac = racRepository.findByRacId(racId)
+                .orElseThrow(() -> new RuntimeException("RAC not found"));
 
         Folder folder = new Folder();
         folder.setFolderName(folderName);
