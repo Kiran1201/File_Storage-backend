@@ -48,4 +48,14 @@ public class FolderController {
     public void deleteFolder(@PathVariable Long id) {
         folderService.deleteFolder(id);
     }
+
+    @GetMapping("/rac/{racId}")
+    public ResponseEntity<List<Folder>> getFoldersByRacId(@PathVariable Long racId) {
+        List<Folder> folders = folderService.getFoldersByRacId(racId);
+        if (folders.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(folders);
+    }
+
 }
