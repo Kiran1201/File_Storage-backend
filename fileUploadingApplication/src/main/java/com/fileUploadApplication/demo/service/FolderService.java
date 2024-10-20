@@ -49,7 +49,7 @@ public class FolderService {
         Folder folder = folderRepository.findById(id).orElseThrow(() -> new RuntimeException("Folder not found"));
         folderRepository.delete(folder);
     }
-    public List<Folder> getFoldersByRacId(Long racId) {
+    public List<Folder> getFoldersByRacId(String racId) {
         return folderRepository.findByRacId(racId);
     }
 

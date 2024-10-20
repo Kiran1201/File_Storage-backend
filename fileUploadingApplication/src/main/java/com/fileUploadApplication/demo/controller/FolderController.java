@@ -50,12 +50,13 @@ public class FolderController {
     }
 
     @GetMapping("/rac/{racId}")
-    public ResponseEntity<List<Folder>> getFoldersByRacId(@PathVariable Long racId) {
+    public ResponseEntity<List<Folder>> getFoldersByRacId(@PathVariable String racId) {
         List<Folder> folders = folderService.getFoldersByRacId(racId);
         if (folders.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(folders);
     }
+
 
 }
